@@ -1,0 +1,53 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "barangay": "Alae" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[124.6400,8.4700],[124.6500,8.4700],[124.6500,8.4800],[124.6400,8.4800],[124.6400,8.4700]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "barangay": "Agusan Canyon" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[124.6500,8.4700],[124.6600,8.4700],[124.6600,8.4800],[124.6500,8.4800],[124.6500,8.4700]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "barangay": "Damilag" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[124.6600,8.4700],[124.6700,8.4700],[124.6700,8.4800],[124.6600,8.4800],[124.6600,8.4700]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "barangay": "Mampayag" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[124.6400,8.4800],[124.6500,8.4800],[124.6500,8.4900],[124.6400,8.4900],[124.6400,8.4800]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "barangay": "Mantibugao" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[124.6500,8.4800],[124.6600,8.4800],[124.6600,8.4900],[124.6500,8.4900],[124.6500,8.4800]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "barangay": "Tankulan" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[124.6600,8.4800],[124.6700,8.4800],[124.6700,8.4900],[124.6600,8.4900],[124.6600,8.4800]]]
+      }
+    }
+  ]
+}

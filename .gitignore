@@ -1,0 +1,41 @@
+# Sensitive configuration
+.env
+.env.*
+!.env.example
+
+# Databases and exports
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+*.csv
+*.xlsx
+*.bak
+*.dump
+
+# User-generated files
+www/data/
+www/storage/sessions/
+www/uploads/
+www/upload/
+
+# Dependencies and runtime
+www/vendor/
+vendor/
+node_modules/
+webcache/
+
+# Backups
+*.age-backup
+*.age-range-backup
+*.before-*-fix
+www/ahdis-report-backup-*/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Installer binaries
+*.exe
+*.dll
+*.msi
