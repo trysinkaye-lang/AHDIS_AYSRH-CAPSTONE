@@ -20,6 +20,7 @@ declare(strict_types=1);
 require_once __DIR__ . "/../config/auth.php";
 require_once __DIR__ . "/../config/database.php";
 require_once __DIR__ . "/../includes/education_options.php";
+require_once __DIR__ . "/../includes/fertility_validation.php";
 
 if (!($conn instanceof PDO)) {
     die("<h3>ERROR</h3><p>Database connection is not PDO.</p>");
@@ -505,6 +506,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_FILES['file'])) {
                     continue;
                 }
 
+                // Validate before creating/updating the adolescent master row.
+                // Living children is independent of the pregnancy count.
+                $livingChildren = ahdisParseNonNegativeWholeNumber(
+                    $data['living_children'] ?? null,
+                    'Number of living children'
+                );
+
                 $encounterDate = imp_parse_date($data['encounter_date'] ?? '')
                     ?: imp_parse_date($data['interview_date'] ?? '')
                     ?: date('Y-m-d');
@@ -721,7 +729,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_FILES['file'])) {
                     ':date'     => $encounterDate,
                     ':preg'     => imp_null($data['pregnant'] ?? null),
                     ':times'    => is_numeric($data['times_pregnant'] ?? null) ? (int)$data['times_pregnant'] : null,
-                    ':children' => is_numeric($data['living_children'] ?? null) ? (int)$data['living_children'] : null,
+                    ':children' => $livingChildren,
                     ':educational_attainment' => $educationImport['educational_attainment'],
                     ':currently_enrolled' => $educationImport['currently_enrolled'],
                     ':grade_year_level' => $educationImport['grade_year_level'],

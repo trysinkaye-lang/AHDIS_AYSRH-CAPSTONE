@@ -6,6 +6,7 @@ date_default_timezone_set('Asia/Manila');
 require_once __DIR__ . "/../config/auth.php";
 require_once __DIR__ . "/../config/database.php";
 require_once __DIR__ . "/../includes/education_options.php";
+require_once __DIR__ . "/../includes/fertility_validation.php";
 
 /* =====================================================
    Helpers
@@ -578,21 +579,9 @@ if (!function_exists('timesPregnantError_save')) {
 }
 
 if (!function_exists('livingChildrenError_save')) {
-    function livingChildrenError_save($raw, $timesPregnant): string
+    function livingChildrenError_save($raw): string
     {
-        $s = trim((string)$raw);
-        if ($s === '') {
-            return '';
-        }
-        
-        if (!ctype_digit($s)) {
-            return 'Living children must be a whole number.';
-        }
-        
-        // Living children and pregnancy count are independent for multiple births.
-        // $timesPregnant is kept in the function signature for compatibility.
-        
-        return '';
+        return ahdisNonNegativeWholeNumberError($raw, 'Living children');
     }
 }
 
@@ -1106,7 +1095,7 @@ if ($timesPregnantError !== '') {
 }
 
 // Validate living children
-$livingChildrenError = livingChildrenError_save($livingChildren, $timesPreg);
+$livingChildrenError = livingChildrenError_save($livingChildren);
 if ($livingChildrenError !== '') {
     failValidation_save($livingChildrenError);
 }

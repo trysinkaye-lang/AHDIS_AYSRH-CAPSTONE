@@ -6,6 +6,7 @@ date_default_timezone_set('Asia/Manila');
 require_once __DIR__ . "/../config/auth.php";
 require_once __DIR__ . "/../config/database.php";
 require_once __DIR__ . "/../includes/education_options.php";
+require_once __DIR__ . "/../includes/fertility_validation.php";
 
 if (!($conn instanceof PDO)) {
     die("<h3>ERROR</h3><p>Database connection is NOT PDO.</p>");
@@ -1773,6 +1774,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                     continue;
                 }
 
+                // Validate before creating or updating any row. Living children
+                // is independent because one pregnancy may produce multiples.
+                $livingChildren = ahdisParseNonNegativeWholeNumber(
+                    getValueFromPossibleColumns($row, ['living_children', 'number_of_children', 'number_of_living_children', 'para'], null),
+                    'Number of living children'
+                );
+
                 $encounterDate = imp_buildEncounterDate($row, $rowWarnings);
 
                 $adolescentCreatedAt = imp_nullify(getValueFromPossibleColumns($row, ['adolescent_created_at', 'profile_created_at', 'created_at', 'date_encoded'], null));
@@ -1974,7 +1982,6 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                 $pregnant = imp_yesNo(getValueFromPossibleColumns($row, ['pregnant', 'pregnancy_status', 'adolescent_mother'], null));
                 $timesPregnant = imp_parseAgeValue(getValueFromPossibleColumns($row, ['times_pregnant', 'gravida'], null));
                 $ageFirstPregnancy = imp_parseAgeValue(getValueFromPossibleColumns($row, ['age_first_pregnancy', 'age_at_first_pregnancy'], null));
-                $livingChildren = imp_parseAgeValue(getValueFromPossibleColumns($row, ['living_children', 'number_of_children', 'number_of_living_children', 'para'], null));
                 $familyPlanning = imp_nullify(getValueFromPossibleColumns($row, ['family_planning', 'family_planning_method'], null));
                 $status = imp_encounterStatus((string)getValueFromPossibleColumns($row, ['encounter_status', 'record_status', 'status'], 'submitted'));
 

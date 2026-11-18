@@ -2152,6 +2152,7 @@ if ($isSnapshotOnly) {
                   class="form-control"
                   name="times_pregnant"
                   min="0"
+                  step="1"
                   inputmode="numeric"
                   value="<?= h(val('times_pregnant')) ?>"
                   <?= $isDuplicateAddBlock ? 'readonly' : '' ?>
@@ -2168,6 +2169,7 @@ if ($isSnapshotOnly) {
                   class="form-control"
                   name="living_children"
                   min="0"
+                  step="1"
                   inputmode="numeric"
                   value="<?= h(val('living_children')) ?>"
                   <?= $isDuplicateAddBlock ? 'readonly' : '' ?>
@@ -3564,7 +3566,6 @@ if ($isSnapshotOnly) {
     if (!/^\d+$/.test(v)) {
       return "Must be a whole number only.";
     }
-    // Multiple births mean living children need not equal pregnancy count.
     return "";
   }
 
