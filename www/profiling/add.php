@@ -3564,11 +3564,7 @@ if ($isSnapshotOnly) {
     if (!/^\d+$/.test(v)) {
       return "Must be a whole number only.";
     }
-    const n = parseInt(v, 10);
-    const times = parseInt(($("times_pregnant")?.value || "0").toString().trim(), 10) || 0;
-    if (times > 0 && n > times) {
-      return "Cannot exceed number of pregnancies.";
-    }
+    // Multiple births mean living children need not equal pregnancy count.
     return "";
   }
 
