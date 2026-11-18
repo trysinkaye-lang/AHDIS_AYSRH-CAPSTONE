@@ -589,19 +589,8 @@ if (!function_exists('livingChildrenError_save')) {
             return 'Living children must be a whole number.';
         }
         
-        $children = (int)$s;
-        $times = 0;
-        
-        if ($timesPregnant !== '' && $timesPregnant !== null) {
-            $timesStr = trim((string)$timesPregnant);
-            if (ctype_digit($timesStr)) {
-                $times = (int)$timesStr;
-            }
-        }
-        
-        if ($times > 0 && $children > $times) {
-            return 'Number of living children cannot exceed number of pregnancies.';
-        }
+        // Living children and pregnancy count are independent for multiple births.
+        // $timesPregnant is kept in the function signature for compatibility.
         
         return '';
     }
